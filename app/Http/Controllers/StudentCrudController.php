@@ -225,8 +225,8 @@ class StudentCrudController extends CrudController
                 'entity' => 'state',
                 'attribute' => 'name',
                 'model' => 'App\Models\State',
-                'wrapper' => [
-                    'class' => 'form-group col-md-3',
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-4',
                 ],
                 'attributes' => [
                     'id' => 'state_id',
@@ -244,7 +244,7 @@ class StudentCrudController extends CrudController
                 'placeholder' => '- ',
                 'minimum_input_length' => 0,
                 'method' => 'POST',
-                'wrapper' => [
+                'wrapperAttributes' => [
                     'class' => 'form-group col-md-4',
                 ],
 
@@ -261,8 +261,8 @@ class StudentCrudController extends CrudController
                 'placeholder' => ' - ',
                 'minimum_input_length' => 0,
                 'method' => 'POST',
-                'wrapper' => [
-                   'class' => 'form-group col-md-3',
+                'wrapperAttributes' => [
+                   'class' => 'form-group col-md-4',
                    ],
             ],
 
