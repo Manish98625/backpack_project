@@ -3,9 +3,9 @@
 <html lang="{{ app()->getLocale() }}" dir="{{ backpack_theme_config('html_direction') }}">
 
 <head>
+   
     @include(backpack_view('inc.head'))
 </head>
-
 <body class="{{ backpack_theme_config('classes.body') }}" bp-layout="plain">
 
 @include(backpack_view('layouts.partials.light_dark_mode_logic'))

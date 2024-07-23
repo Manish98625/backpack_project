@@ -19,6 +19,9 @@
             z-index: 999;
         }
     </style>
+    
+
+
 </head>
 
 <body class="{{ backpack_theme_config('classes.body') }} @if(backpack_theme_config('auth_layout') === 'cover') d-flex flex-column theme-light @endif">

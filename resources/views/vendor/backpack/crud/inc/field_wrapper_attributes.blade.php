@@ -8,7 +8,7 @@ $required = isset($field['showAsterisk']) ? ($field['showAsterisk'] ? ' required
 
 @if (isset($field['wrapperAttributes']))
     @if (!isset($field['wrapperAttributes']['class']))
-        class="form-group col-sm-12 {{ $required }}"
+        class="form-group col-sm-12{{ $required }}"
     @else
         class="{{ $field['wrapperAttributes']['class'] }} {{ $required }}"
     @endif

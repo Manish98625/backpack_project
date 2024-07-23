@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\City;
-use App\Models\District;
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class Appsetting extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -19,7 +17,7 @@ class State extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'states';
+    protected $table = 'appsettings';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -44,14 +42,6 @@ class State extends Model
     |--------------------------------------------------------------------------
     */
 
-  public function district()
-    {
-        return $this->belongsTo(District::class, 'district_id');
-    }
-    // public function city()
-    // {
-    //     return $this->belongsTo(City::class, 'cities_id');
-    // }
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticlesRequest;
+use App\Models\DetailRow;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -29,6 +30,9 @@ class ArticlesCrudController extends CrudController
         CRUD::setModel(\App\Models\Articles::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/articles');
         CRUD::setEntityNameStrings('articles', 'articles');
+
+     
+
     }
 
     /**
@@ -66,10 +70,9 @@ class ArticlesCrudController extends CrudController
                 'name' => 'image',
                 'label' => 'Image',
                 'type' => 'upload',
-                 'disk' => 'public',
+                'disk' => 'public',
             ],
 
-          
         ]);
         /**
          * Columns can be defined using the fluent syntax:
@@ -117,7 +120,7 @@ class ArticlesCrudController extends CrudController
                 'name' => 'image',
                 'label' => 'Image',
                 'type' => 'upload',
-                 'withFiles' => true,
+                'withFiles' => true,
             ],
 
             [
@@ -145,4 +148,16 @@ class ArticlesCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+//     protected function showDetailsRow($id)
+//     {
+
+//         // Fetch the model from the database based on the provided ID
+//         $model = DetailRow::findOrFail($id);
+
+// // Pass the model data to a view for rendering
+//         return view('detail_row', ['DetailRow' => $model]);
+
+//     }
+
 }

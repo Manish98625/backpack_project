@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
 use App\Http\Requests\StateRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -74,4 +75,7 @@ class StateCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+  
+
 }

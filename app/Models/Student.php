@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Skill;
 use App\Models\State;
+use App\Models\District;
 use App\Models\StudentSkill;
+use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
@@ -46,16 +47,14 @@ class Student extends Model
         return $this->belongsTo(State::class, 'state_id');
     }
 
-    public function district()
+    public function districtentity()
     {
         return $this->belongsTo(District::class, 'district_id');
     }
 
-
-    
-    public function city()
+    public function cityentity()
     {
-        return $this->belongsTo(City::class, 'cities_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     /*
@@ -83,7 +82,25 @@ class Student extends Model
 
     }
 
-  
+    // public function getDistricts()
+    // {
+    //     $districts_id = District::where('student_id', $this->id)->get();
+    //     $district_id = '';
+    //     foreach ($districts_id as $district_id) {
+    //         if ($district_id) {
+    //             $district_id = District::find($district_id->skill_id)->name;
+    //             $district_name =$district_id;
+    //             // $skill_name_final = $skill_name_final . ',' . $skill_name;
+
+    //         } else {
+    //             return '';
+
+    //         }
+
+    //     }
+    //     return $district_name;
+
+    // }
 
     /*
     |--------------------------------------------------------------------------

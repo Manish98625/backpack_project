@@ -10,18 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {Schema::create('student_skills', function (Blueprint $table) {
-    $table->id();
-    // Foreign key for the student
-    $table->unsignedBigInteger('student_id');
-    $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+    {
+        // Schema::create('student_skills', function (Blueprint $table) {
+        //     $table->id();
+        //     // Foreign key for the student
+        //     $table->unsignedBigInteger('student_id');
+        //     $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
 
-// Foreign key for the skill
-    $table->unsignedBigInteger('skill_id');
-    $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
+        // // Foreign key for the skill
+        //     $table->unsignedBigInteger('skill_id');
+        //     $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
 
-    $table->timestamps();
-});
+        //     $table->timestamps();
+        // });
 
     }
 
@@ -30,8 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('students_skills', function (Blueprint $table) {
-            //
-        });
+        
     }
 };

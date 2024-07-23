@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\City;
 use App\Models\State;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -39,10 +40,7 @@ class District extends Model
     }
 
 
-       public function cities()
-    {
-        return $this->hasMany('App\Models\City');
-    }
+   
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

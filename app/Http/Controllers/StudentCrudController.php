@@ -10,6 +10,7 @@ use App\Models\Student;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Http\Request;
+use DB;
 
 /**
  * Class StudentCrudController
@@ -50,37 +51,38 @@ class StudentCrudController extends CrudController
         // CRUD::setFromDb();
 
         CRUD::setColumns([
+
             [
                 'name' => 'name',
                 'type' => 'text',
                 'label' => 'Student Name',
             ],
-            [
-                'name' => 'username',
-                'type' => 'text',
-                'label' => 'Username',
-            ],
-            [
-                'name' => 'email',
-                'type' => 'email',
-                'label' => 'Email',
-            ],
-            [
-                'name' => 'date',
-                'type' => 'date',
-                'label' => 'Date',
-            ],
-            [
+            // [
+            //     'name' => 'username',
+            //     'type' => 'text',
+            //     'label' => 'Username',
+            // ],
+            // [
+            //     'name' => 'email',
+            //     'type' => 'email',
+            //     'label' => 'Email',
+            // ],
+            // [
+            //     'name' => 'date',
+            //     'type' => 'date',
+            //     'label' => 'Date',
+            // ],
+            // [
 
-                'name' => 'phonenumber',
-                'type' => 'number',
-                'label' => 'PhoneNumber',
-            ],
-            [
-                'name' => 'gender',
-                'label' => 'Gender',
-                'type' => 'select',
-            ],
+            //     'name' => 'phonenumber',
+            //     'type' => 'number',
+            //     'label' => 'PhoneNumber',
+            // ],
+            // [
+            //     'name' => 'gender',
+            //     'label' => 'Gender',
+            //     'type' => 'select',
+            // ],
             // [
             //     'name' => 'address',
             //     'type' => 'text',
@@ -102,12 +104,12 @@ class StudentCrudController extends CrudController
             //     'type' => 'select',
             // ],
 
-            // [
-            //     'name' => 'skill_id',
-            //     'label' => 'Skills',
-            //     'type' => 'model_function',
-            //     'function_name' => 'get_skill',
-            // ],
+            [
+                'name' => 'skill_id',
+                'label' => 'Skills',
+                'type' => 'model_function',
+                'function_name' => 'get_skill',
+            ],
             // [
             //     'name' => 'image',
             //     'type' => 'image',
@@ -115,11 +117,31 @@ class StudentCrudController extends CrudController
             //     'disk' => 'public',
             // ],
 
-            // [
-            //     'name' => 'district',
-            //     'label' => 'District',
-            //     'type' => 'custom_district_field',
-            // ],
+            [
+                'name' => 'state_id',
+                'label' => 'state',
+                'type' => 'select',
+            ],
+
+            [
+                'name' => 'district_id',
+                'label' => 'District',
+                'type' => 'select',
+                'entity' => 'districtentity',
+                'attribute' => "name",
+                'model' => "App\Models\District",
+
+            ],
+
+            [
+                'name' => 'city_id',
+                'label' => 'City',
+                'type' => 'select',
+                'entity' => 'cityentity',
+                'attribute' => 'name',
+                'model' => 'App\Models\City',
+
+            ],
 
         ]);
 
@@ -138,7 +160,7 @@ class StudentCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StudentRequest::class);
-        // CRUD::setFromDb(); // set fields from db columns.
+        //   CRUD::setFromDb(); // set fields from db columns.
 
         CRUD::addFields([
             [
@@ -201,13 +223,13 @@ class StudentCrudController extends CrudController
                     'class' => 'form-group col-md-4',
                 ],
             ],
-              [
+            [
                 'name' => 'image',
                 'type' => 'upload',
                 'label' => 'Image',
                 'withFiles' => true,
                 'wrapper' => [
-                    'class' => 'form-group col-md-4' ,
+                    'class' => 'form-group col-md-4',
                 ],
             ],
             [
@@ -221,7 +243,7 @@ class StudentCrudController extends CrudController
             [
                 'name' => 'state_id',
                 'label' => 'State',
-                'type' => 'select2',
+                'type' => 'select',
                 'entity' => 'state',
                 'attribute' => 'name',
                 'model' => 'App\Models\State',
@@ -236,7 +258,7 @@ class StudentCrudController extends CrudController
                 'name' => 'district_id',
                 'label' => trans('District'),
                 'type' => 'select2_from_ajax',
-                'entity' => 'district',
+                'entity' => 'districtentity',
                 'attribute' => 'name',
                 'model' => 'App\Models\District',
                 'data_source' => url('api/districts/state_id'),
@@ -247,13 +269,14 @@ class StudentCrudController extends CrudController
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-4',
                 ],
+                'include_all_form_fields' => true,
 
             ],
             [
-                'name' => 'cities_id',
-                'label' => 'Cities',
+                'name' => 'city_id',
+                'label' => trans('City'),
                 'type' => 'select2_from_ajax',
-                'entity' => 'city',
+                'entity' => 'cityentity',
                 'attribute' => 'name',
                 'model' => 'App\Models\City',
                 'data_source' => url('api/cities/district_id'),
@@ -262,11 +285,10 @@ class StudentCrudController extends CrudController
                 'minimum_input_length' => 0,
                 'method' => 'POST',
                 'wrapperAttributes' => [
-                   'class' => 'form-group col-md-4',
-                   ],
+                    'class' => 'form-group col-md-4',
+                ],
+                'include_all_form_fields' => true,
             ],
-
-          
 
             [
                 'label' => 'skill',
@@ -303,32 +325,26 @@ class StudentCrudController extends CrudController
     public function store(Request $request)
     {
 
-        //   dd($request);
-        $student = new Student();
-        $student->name = $request->input('name');
-        $student->username = $request->input('username');
-        $student->email = $request->input('email');
-        $student->date = $request->input('date');
-        $student->gender_id = $request->input('gender');
-        $student->image = $request->input('image');
-        $student->class = $request->input('class');
-        $student->district = $request->input('district');
-        $student->address = $request->input('address');
-        $student->phonenumber = $request->input('phonenumber');
-        // $student->state_id = $request->input('state');
-
-        // $student->name = $request->input('name'); // Adjust based on your form fields
-// ... other student data
-
-        $student->save();
-
-// Attach selected skills to the student
-        $student->skills()->attach($request->input('skill_id'));
-        $request->merge([
+        // dd($request);
+        $student = Student::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'date' => $request->input('date'),
+            'gender_id' => $request->input('gender'),
+            'image' => $request->input('image'),
+            'class ' => $request->input('class'),
+            'address' => $request->input('address'),
+            'phonenumber' => $request->input('phonenumber'),
             'state_id' => $request->input('state_id'),
             'district_id' => $request->input('district_id'),
-            'cities_id' => $request->input('cities_id'),
+            'city_id' => $request->input('city_id'),
+            // 'skill_id'=> skill::attach($request->input('skill_id')),
+
         ]);
+
+        // Assuming 'skill_id' is an array of skill IDs
+        $student->skills()->attach($request->input('skill_id'));
 
         return redirect('admin/student');
     }
@@ -337,7 +353,7 @@ class StudentCrudController extends CrudController
     {
         $skills = $this->skills->pluck('name')->toArray();
         dd($skills); // Check the output in your console
-        return implode(', ', $skills);
+        return implode(' ', $skills);
 
     }
 
@@ -352,12 +368,6 @@ class StudentCrudController extends CrudController
         $skillIds = $request->input('skill_ids', $request->skill_id);
         // dd($skillIds);
         $student->skills()->sync($skillIds);
-
-        $request->merge([
-            'state_id' => $request->input('state_id'),
-            'district_id' => $request->input('district_id'),
-            'cities_id' => $request->input('cities_id'),
-        ]);
 
         return redirect('admin/student');
 
@@ -403,6 +413,32 @@ class StudentCrudController extends CrudController
         $results = $searchTerm ? $options->searchByName($searchTerm)->paginate($paginationLimit) : $options->paginate($paginationLimit);
 
         return $results;
+
+    }
+
+    protected function setupShowOperation()
+    {
+        // MAYBE: do stuff before the autosetup
+
+        // automatically add the columns
+        $this->autoSetupShowOperation();
+
+        // MAYBE: do stuff after the autosetup
+
+        // for example, let's add some new columns
+        CRUD::column([
+
+            'name' => 'skill_id',
+            'label' => 'Skills',
+            'type' => 'model_function',
+            'function_name' => 'get_skill',
+
+        ]);
+
+        // // or maybe remove a column
+        // CRUD::column('text')->remove();
+
+
 
     }
 

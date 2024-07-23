@@ -32,8 +32,8 @@ return new class extends Migration
             $table->float('phonenumber')->nullable();
             $table->string('address');
             $table->string('image', 500)->nullable();
-            $table->foreignId('gender_id')->constrained();
-            $table->foreignId('skill_id')->constrained();
+            $table->foreignId('gender_id')->nullable()->constrained();
+            $table->foreignId('skill_id')->nullable()->constrained();
 
          
 

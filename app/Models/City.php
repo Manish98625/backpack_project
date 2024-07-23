@@ -21,7 +21,7 @@ class City extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'district_id'];
+    protected $fillable = ['name' , 'district_id'];
     // protected $hidden = [];
 
     /*
